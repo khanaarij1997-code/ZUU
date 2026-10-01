@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>For Iqra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#d9a38f;--pink:#f5cdd5;--cream:#fbf3e8;--serif:"Cormorant Garamond","Palatino Linotype",Palatino,Georgia,serif}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{font-family:var(--serif);font-size:20px;color:var(--cream);overflow-x:hidden;background-attachment:fixed;transition:background 1s;
+ background:radial-gradient(ellipse at 50% 0,#7a1a3a,#3a0a1a 55%,#1a050c)}
+body[data-l="2"]{background:radial-gradient(ellipse at 50% 100%,#8a2a4a,#4a0f26 60%,#240812)}
+body[data-l="3"]{background:linear-gradient(160deg,#5a1530,#2a0713 60%,#3a1018)}
+body[data-l="4"]{background:radial-gradient(circle at 85% 8%,#8a3048,#3a0a1a 60%)}
+body[data-l="5"]{background:radial-gradient(circle at 50% 40%,#3a2210,#150a06 70%)}
+body[data-l="6"],body[data-l="7"],body[data-l="8"]{background:radial-gradient(circle at 50% 45%,#2e0a18,#080204 75%)}
+#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.h{position:absolute;bottom:-30px;color:#e88aa0;opacity:0;animation:up linear forwards}
+@keyframes up{10%{opacity:.45}to{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+.sp{position:absolute;color:var(--rose);animation:spark .9s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--x),var(--y)) scale(.3);opacity:0}}
+.cf{position:absolute;top:-14px;width:9px;height:14px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+#prog{position:fixed;top:0;left:0;right:0;z-index:5;text-align:center;padding:12px 8px 8px;visibility:hidden;background:linear-gradient(#0008,transparent)}
+#prog small{display:block;letter-spacing:.3em;font-size:.65rem;color:var(--rose)}
+#prog i{font-style:normal;color:#ffffff30;font-size:.9rem;transition:.6s}
+#prog i.on{color:var(--rose);text-shadow:0 0 10px #e88aa0}
+#prog b{display:inline-block;width:20px;height:2px;margin:0 4px 3px;background:#ffffff20;transition:.6s}
+#prog b.on{background:var(--rose)}
+#mbtn{position:fixed;right:12px;bottom:12px;z-index:10;background:#0007;color:var(--cream);border:1px solid var(--rose);border-radius:30px;padding:9px 15px;font:inherit;font-size:.8rem;cursor:pointer}
+#stage{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 18px 60px;transition:opacity .6s,transform .6s}
+#stage.out{opacity:0;transform:scale(.97)}
+h1{font-size:clamp(2.6rem,10vw,5rem);font-weight:300;letter-spacing:.06em;background:linear-gradient(#fff3e6,var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+h2{font-size:clamp(1.9rem,6.5vw,3rem);font-weight:300;font-style:italic;color:var(--pink);margin-bottom:12px}
+p{line-height:1.5;margin:8px 0;max-width:34em}
+.big{font-size:clamp(1.6rem,5.5vw,2.4rem);font-style:italic;color:var(--pink)}
+.small{font-size:.85rem;font-weight:600;color:var(--rose);letter-spacing:.15em}
+.ok{color:var(--pink);font-size:1.25rem}
+.rise{animation:rise 1.1s ease var(--d,0s) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{translate:-7px}75%{translate:7px}}
+@keyframes glow{50%{box-shadow:0 0 90px #e8b4a0aa}}
+.card{width:100%;max-width:560px;margin:16px auto;padding:24px;border-radius:18px;background:#ffffff12;border:1px solid #d9a38f77;backdrop-filter:blur(10px);box-shadow:0 10px 40px #0006,0 0 24px #d9a38f22}
+.btn{margin-top:16px;min-height:48px;padding:14px 30px;border:0;border-radius:40px;cursor:pointer;font:600 1rem var(--serif);letter-spacing:.08em;color:#3a0a1a;background:linear-gradient(135deg,#f0c4b2,#c9806e);box-shadow:0 6px 24px #c9806e66;transition:transform .2s}
+.btn:hover{transform:scale(1.04)}
+.opt{display:block;width:100%;margin:10px 0;padding:14px;font:inherit;font-size:1rem;color:var(--cream);background:transparent;border:1px solid var(--rose);border-radius:12px;cursor:pointer;transition:.25s}
+.opt:hover:not(:disabled){background:#d9a38f33}
+.opt.bad{animation:shake .4s;border-color:#ff7a8a}
+.opt.good{background:#d9a38f55;border-color:#fff3e6}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:min(100%,440px);margin:14px auto}
+.mc{aspect-ratio:3/4;position:relative;border:0;background:none;padding:0;cursor:pointer}
+.mc span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;backface-visibility:hidden;transition:transform .55s,box-shadow .4s}
+.bk{background:linear-gradient(145deg,#7a1a3a,#4a0f26);border:1px solid var(--rose);color:var(--rose);font-size:1.6rem;transform:perspective(600px) rotateY(0)}
+.ft{background:var(--cream);font-size:clamp(1.4rem,6vw,2.2rem);transform:perspective(600px) rotateY(-180deg)}
+.mc.f .bk{transform:perspective(600px) rotateY(180deg)}
+.mc.f .ft{transform:perspective(600px) rotateY(0)}
+.mc.m .ft{background:#ffe6dc;box-shadow:0 0 22px #e8b4a0}
+.mc.w .ft{background:#f5b5b5;animation:shake .4s}
+.slots{min-height:76px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:12px;border:1px dashed var(--rose);border-radius:14px;margin:12px 0;width:100%;max-width:560px}
+.slots.glow{animation:glow 1.2s 2;border-style:solid}
+.chip{padding:10px 16px;font:600 1rem var(--serif);letter-spacing:.06em;color:#3a0a1a;background:var(--cream);border:0;border-radius:10px;cursor:pointer}
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:560px}
+.hint{color:#ffffff66;font-size:.9rem}
+.qt{font-size:1.35rem;margin:8px 0 14px}
+.clue{font-style:italic;color:var(--pink);margin:10px auto}
+.lk{font-size:3.4rem;transition:.6s}.lk.open{filter:drop-shadow(0 0 20px gold);transform:scale(1.25)}
+.ds{font-size:2.2rem;letter-spacing:.5em;margin:8px 0 14px;color:#f0d28a;padding-left:.5em}
+.pad{display:grid;grid-template-columns:repeat(3,72px);gap:10px;justify-content:center}
+.pad button{height:60px;border-radius:50%;font:inherit;font-size:1.3rem;color:#f0d28a;background:#f0d28a18;border:1px solid #f0d28a88;cursor:pointer}
+.shk{animation:shake .4s}
+.trio{display:grid;gap:14px;width:min(100%,420px);margin-top:18px}
+.pick{padding:22px;font:inherit;font-size:1.05rem;letter-spacing:.08em;color:var(--cream);background:#ffffff0d;border:1px solid #d9a38f88;border-radius:16px;cursor:pointer;transition:.3s}
+.pick:hover{background:#d9a38f33;box-shadow:0 0 30px #d9a38f55}
+.quote{font-size:1.5rem;font-style:italic;color:var(--pink);max-width:20em}
+.arena{position:relative;width:min(100%,420px);height:260px;margin:14px auto;border:1px dashed #d9a38f66;border-radius:16px}
+#ht{position:absolute;left:40%;top:40%;font-size:2.4rem;color:#ff6b8a;background:none;border:0;cursor:pointer;text-shadow:0 0 18px #ff6b8a;transition:.15s}
+.env{position:relative;width:min(280px,78vw);height:180px;margin:18px auto;border-radius:6px;background:linear-gradient(#e8b4a0,#c9806e);box-shadow:0 0 60px #e8b4a088;animation:glow 3s infinite;cursor:pointer}
+.env .flap{position:absolute;inset:0 0 auto;height:62%;background:#d4917d;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform 1.1s}
+.env.open .flap{transform:rotateX(180deg)}
+.env .seal{position:absolute;left:50%;top:48%;translate:-50% -50%;font-size:1.8rem;color:#7a1a3a}
+.vf{position:relative;width:min(100%,760px);margin:16px auto;padding:10px;border-radius:16px;border:1px solid var(--rose);background:#0008;box-shadow:0 0 60px #d9a38f55}
+.vf video{width:100%;display:block;border-radius:10px;background:#000;max-height:70vh}
+.vf .btn{position:absolute;left:50%;top:50%;translate:-50% -50%}
+@media(prefers-reduced-motion:reduce){.rise{animation-delay:0s!important}.h{display:none}}
+#adm{position:fixed;left:6px;bottom:6px;z-index:11;width:36px;height:36px;border:0;border-radius:50%;background:#fff;opacity:.04;cursor:pointer}
+#mod{position:fixed;inset:0;z-index:20;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center}
+#mod[hidden]{display:none}
+#mod{display:block;overflow-y:auto;-webkit-overflow-scrolling:touch;color:var(--cream);font-family:var(--serif)}
+#mod[hidden]{display:none}
+#mod .card{width:100%;max-width:640px;text-align:left;margin:20px auto;background:#2a0713;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid #d9a38f88}
+#mod label{display:block;font-size:.8rem;color:var(--rose);margin-top:10px}
+#mod h3{font-weight:400;font-style:italic;color:var(--pink);margin:22px 0 4px;border-bottom:1px solid #d9a38f44}
+#mod textarea{width:100%;min-height:90px;padding:10px;font:inherit;font-size:.8rem;border-radius:10px;border:1px solid var(--rose);background:#0006;color:var(--cream)}
+#mod select{padding:10px;font:inherit;border-radius:10px;border:1px solid var(--rose);background:#2a0713;color:var(--cream)}
+.qr{display:grid;grid-template-columns:1fr auto;gap:4px;padding:8px 0;border-bottom:1px dashed #d9a38f33}
+.qr input{margin:2px 0!important}.qr .x{grid-row:1/6;grid-column:2;background:none;border:0;color:#ff8a9a;font-size:1.2rem;cursor:pointer}
+#mod input{width:100%;padding:12px;margin:10px 0;font:inherit;font-size:1rem;border-radius:10px;border:1px solid var(--rose);background:#0006;color:var(--cream)}
+#mod .btn{margin:6px 4px 0}
+.sm{display:inline-block;margin-top:10px;font-size:.8rem;color:var(--rose)}
+body[data-l]{background-attachment:fixed;background-repeat:no-repeat}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(1.6px 1.6px at 12% 22%,#fff9,transparent),radial-gradient(1.2px 1.2px at 78% 14%,#ffe9c9cc,transparent),radial-gradient(1.8px 1.8px at 45% 60%,#fff8,transparent),radial-gradient(1.2px 1.2px at 88% 72%,#fff9,transparent),radial-gradient(1.4px 1.4px at 28% 86%,#ffe9c9aa,transparent),radial-gradient(1px 1px at 62% 38%,#fff9,transparent);animation:tw 5s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.2}to{opacity:1}}
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,#000a 130%)}
+h1{font-family:var(--serif);font-weight:600;letter-spacing:.05em;line-height:1.15;font-size:clamp(2.2rem,9vw,4.4rem);background-image:linear-gradient(180deg,#fff8e8,#f3cf8e 50%,#d9a38f);filter:drop-shadow(0 0 18px #e8b4a066)}
+body{font-weight:500;-webkit-font-smoothing:antialiased}
+h2{font-weight:500!important;background-image:linear-gradient(90deg,#f5cdd5,#f3cf8e,#f5cdd5);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.card{background:linear-gradient(145deg,#ffffff1c,#ffffff08);border-color:#f0c4b299;box-shadow:0 12px 44px #0007,0 0 30px #e8b4a033,inset 0 1px 0 #ffffff22}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#fff8,transparent);transform:skewX(-20deg);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{to{left:130%}}
+.mc span{-webkit-backface-visibility:hidden}
+.opt{background:#ffffff0a;backdrop-filter:blur(4px)}
+</style>
+</head>
+<body data-l="0">
+<div id="fx"></div>
+<div id="prog"><small id="plabel">LOVE JOURNEY</small><div id="pbar"></div></div>
+<main id="stage"></main>
+<button id="adm" aria-label="."></button>
+<div id="mod" hidden></div>
+<button id="mbtn">🔊 Music ON</button>
+
+<script>
+/* ================= 1. CONFIGURATION — YAHAN SE BADLEIN ================= */
+// LOCK CODE: anniversary ki date DDMMYYYY mein (8 digits). Aap jitna lamba chahein rakh sakte hain.
+// Misaal: 14 February 2020 -> "02102025". Jab date bataein gay to yahan likh dein.
+let FINAL_LOCK_CODE = "02102025";
+// SECRET CODE: isay dabane se video link wala hidden menu khulta hai (neeche bayen kone ka chhota sa gol button).
+let ADMIN_CODE = "786786";
+const GAME_CONFIG = {
+  wifeName: "Zuu",                        // <-- biwi ka naam
+  husbandName: "Aap ka Anas",            // <-- apna naam (video ke neeche likha aata hai)
+  anniversaryDate: "Hamari Anniversary",   // <-- date ka text (shuru ki screen par)
+  finalLockCode: FINAL_LOCK_CODE,
+  videoLink: "https://youtu.be/YOQnko7rv28?si=ctMl91gsrgqWZIme",                           // <-- (optional) video ka link yahan bhi likh sakte hain; ya hidden menu se dalein
+  videoFile: "anniversary-video.mp4",      // <-- agar link na ho to yeh file isi folder mein honi chahiye
+  musicFile: "background-music.mp3"        // <-- music file ka naam
+};
+// Level 1: "correct" = sahi option ka number, 0 se ginti (0 = pehla option).
+let LEVEL1 = {
+  question: "Aap ke khayal mein hamari kahani asal mein kahan se shuru hui?",
+  options: ["Ek aisay din jo hum dono ko yaad hai", "Kisi aisi jagah jahan socha bhi nahi tha", "Kisi jaan-pehchan wale ke zariye", "Ek bilkul aam se din"],
+  correct: 2
+};
+// Level 3 jumla (BARE HURUF, alfaaz ke darmiyan ek space).
+let SENTENCE = "MERI DUNIYA KI SAB SE HASEEN SHEHZADI";
+// Level 4 sawal. "me" aur "you" = jawab ke baad nazar aane wale mazahiya jumlay.
+let QUIZ = [
+  {q:"Kaun zyada kehta hai “mujhe bhook nahi” aur phir samnay wale se bhi kha leta hai?", me:"Dilchasp jawab... 👀", you:"Chalo, ijazat hai ❤️"},
+  {q:"Pehle sorry kaun bolta hai?", me:"Himmat wali baat hai.", you:"Aap ke shohar ko is par kuch kehna ho sakta hai 😂"},
+  {q:"Tayyar hone mein zyada waqt kaun lagata hai?", me:"Sachchai. Hum izzat karte hain.", you:"Bara ilzaam hai. Note kar liya. 👀"},
+  {q:"Zyada dramebaaz kaun hai?", me:"Wah. Apne aap ko pehchan liya.", you:"Bada afsos hua galat jawab... 😂"},
+  {q:"Kaun sab se zyada attentions chata hai?", me:"Pyari. Humein pata tha ❤️", you:"Dilchasp... bohat dilchasp."},
+  {q:"Acha ye batao, Biryani kaisi thi? 😋", la:"Bohat khaas 😍", me:"Mujhe pata tha ❤️", lb:"Bas average... hotel le jate to maza aata 😅", you:"Agli baar inshallah 😄"}
+];
+// Level 5 hints (yeh FINAL_LOCK_CODE tak le jaane chahiyen).
+let CLUES = ["Hint : Koi aik aesi special date jis se ye code khule"];
+// Level 6 quote ("Ek aur yaad" chunne par nazar aata hai).
+let QUOTE = "Poori duniya mein koi dil mere liye aap ke dil jaisa nahi.";
+/* ===== Saved settings (secret menu se save hui cheezein yahan load hoti hain) ===== */
+const snap=()=>({wifeName:GAME_CONFIG.wifeName,husbandName:GAME_CONFIG.husbandName,anniversaryDate:GAME_CONFIG.anniversaryDate,videoLink:GAME_CONFIG.videoLink,lock:FINAL_LOCK_CODE,admin:ADMIN_CODE,level1:LEVEL1,sentence:SENTENCE,quiz:QUIZ,clues:CLUES,quote:QUOTE});
+const DEFAULTS=JSON.parse(JSON.stringify(snap()));
+function applyCfg(c){
+  if(!c)return;
+  ['wifeName','husbandName','anniversaryDate','videoLink'].forEach(k=>{ if(typeof c[k]==='string')GAME_CONFIG[k]=c[k]; });
+  if(c.lock)FINAL_LOCK_CODE=c.lock; if(c.admin)ADMIN_CODE=c.admin; if(c.level1)LEVEL1=c.level1; if(c.sentence)SENTENCE=c.sentence;
+  if(c.quiz&&c.quiz.length)QUIZ=c.quiz; if(c.clues)CLUES=c.clues; if(c.quote)QUOTE=c.quote;
+}
+// HTML ke andar PAKKI settings: menu ka Export wala text null ki jagah paste karein, jaise: const BAKED = {...};
+const BAKED = null;
+applyCfg(BAKED);
+try{ applyCfg(JSON.parse(localStorage.getItem('iqraCfg'))); }catch(e){}
+/* ================= 2. GAME STATE & HELPERS ================= */
+const G = GAME_CONFIG, W = G.wifeName, TOTAL = 7;
+const $ = s => document.querySelector(s);
+const stage = $('#stage');
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]} return a; };
+const line = (t,d,c='') => `<p class="rise ${c}" style="--d:${d}s">${t}</p>`;
+const btn = (t,id,d=0) => `<button class="btn rise" id="${id}" style="--d:${d}s">${t}</button>`;
+const on = (id,fn) => { $('#'+id).onclick = () => { SFX.click(); fn(); }; };
+const say = (t,c='') => { $('#fb').innerHTML = `<p class="${c}">${t}</p>`; };
+document.title = W + " ke liye";
+/* ================= 3. HTML RENDERING / SCREEN TRANSITIONS ================= */
+$('#pbar').innerHTML = Array.from({length:TOTAL},()=>'<i>❤</i>').join('<b></b>');
+function setProg(n){
+  $('#prog').style.visibility = (n>=1 && n<=TOTAL) ? 'visible' : 'hidden';
+  $('#plabel').textContent = `MOHABBAT KA SAFAR · LEVEL ${n} / ${TOTAL}`;
+  document.querySelectorAll('#pbar i').forEach((e,i)=>e.classList.toggle('on',i<n));
+  document.querySelectorAll('#pbar b').forEach((e,i)=>e.classList.toggle('on',i<n-1));
+}
+let busy=false;
+function go(n,html,init){
+  if(busy)return; busy=true;
+  fadeTo(.1); stage.classList.add('out');
+  setTimeout(()=>{ busy=false;
+    stage.innerHTML = html; document.body.dataset.l = n; setProg(n);
+    window.scrollTo(0,0); stage.classList.remove('out');
+    fadeTo(n===7 ? .22 : .4); init && init();
+  },600);
+}
+function win(msg,next,label='Aage barhein'){
+  SFX.ok(); burst();
+  $('#fb').innerHTML = `<p class="ok">${msg}</p><button class="btn" id="nx">${label}</button>`;
+  on('nx',next);
+}
+/* ================= 4. LEVEL LOGIC ================= */
+function start(){
+  go(0, `<h1 class="rise" style="--d:.3s">${W.toUpperCase()} KE LIYE ❤️</h1>`+
+    line("Ek Safar Sirf Aap Ke Liye",1.6,'big')+
+    line(`<span class="small">${G.anniversaryDate}</span>`,2.4)+
+    line("Apni anniversary ka surprise paane se pehle...<br>aap ko usay kamaana hoga.",3.6)+
+    btn("SAFAR SHURU KAREIN ❤️",'begin',5.5),
+    ()=>on('begin',()=>{ initMusic(); level1(); }));
+}
+function level1(){
+  go(1, `<h2 class="rise">Jahan Hamari Kahani Shuru Hui</h2>`+
+    line(`${W}, har khoobsurat kahani ka ek aaghaz hota hai.<br>Magar hamari kahani kahan se shuru hui, yeh sirf aap jaanti hain.`,.8)+
+    `<div class="card rise" style="--d:2.6s"><p class="qt">${LEVEL1.question}</p>`+
+    LEVEL1.options.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+`<div id="fb"></div></div>`,
+  ()=>document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(+b.dataset.i===LEVEL1.correct){
+      document.querySelectorAll('.opt').forEach(x=>x.disabled=true); b.classList.add('good');
+      win("Wahi hai! ❤️<br>Aap ko ab bhi yaad hai.",level2);
+    } else {
+      SFX.bad(); b.classList.add('bad'); setTimeout(()=>b.classList.remove('bad'),500);
+      say("Bilkul nahi ❤️<br>Zara aur sochein, hamare baare mein...");
+    }}));
+}
+function level2(){
+  const S=['❤️','🌹','💍','✨'], cards=shuffle([...S,...S]);
+  let open=[],lock=false,moves=0,found=0;
+  go(2, `<h2 class="rise">Yaadon Ka Khel</h2>`+line("Jodiyan dhoondein. Har jodi hamari kahani ka ek chhota sa hissa hai.",.6)+
+    `<p class="rise" style="--d:1s">Chaalein: <b id="mv">0</b></p><div class="grid rise" style="--d:1.2s">`+
+    cards.map((s,i)=>`<button class="mc" data-i="${i}"><span class="bk">❤</span><span class="ft">${s}</span></button>`).join('')+
+    `</div><div id="fb"></div>`,
+  ()=>document.querySelectorAll('.mc').forEach(c=>c.onclick=()=>{
+    if(lock||c.classList.contains('f'))return;
+    SFX.flip(); c.classList.add('f'); open.push(c);
+    if(open.length===2){
+      moves++; $('#mv').textContent=moves; lock=true;
+      const [a,b]=open;
+      if(cards[a.dataset.i]===cards[b.dataset.i]){
+        a.classList.add('m'); b.classList.add('m'); open=[]; lock=false; SFX.ok();
+        if(++found===4) setTimeout(()=>win("Kuch yaadein kabhi bhulayi nahi ja saktin.<br>Level 2 mukammal ❤️",level3),700);
+      } else {
+        setTimeout(()=>{a.classList.add('w');b.classList.add('w');SFX.bad()},350);
+        setTimeout(()=>{[a,b].forEach(x=>x.classList.remove('f','w'));open=[];lock=false},1000);
+      }
+    }}));
+}
+function level3(){
+  const words=SENTENCE.split(' '), idx=words.map((w,i)=>i);
+  let pool=shuffle(idx), placed=[], solved=false;
+  if(pool.join()===idx.join()) pool.reverse();
+  go(3, `<h2 class="rise">Mohabbat Bhara Khat</h2>`+line("Alfaaz bikhar gaye hain. Inhein sahi tarteeb mein lagayein.",.6)+
+    `<div class="slots rise" id="sl" style="--d:1s"></div><div class="pool rise" id="pl" style="--d:1.2s"></div><div id="fb"></div>`,
+  ()=>{
+    const draw=()=>{
+      $('#sl').innerHTML = placed.map(i=>`<button class="chip" data-i="${i}" data-s="1">${words[i]}</button>`).join('') || '<span class="hint">Alfaaz ko tarteeb se dabayein...</span>';
+      $('#pl').innerHTML = pool.map(i=>`<button class="chip" data-i="${i}">${words[i]}</button>`).join('');
+      document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+        if(solved)return; SFX.click(); const i=+c.dataset.i;
+        if(c.dataset.s){placed.splice(placed.indexOf(i),1);pool.push(i)} else {pool.splice(pool.indexOf(i),1);placed.push(i)}
+        $('#fb').innerHTML=''; draw(); check();
+      });
+    };
+    const check=()=>{
+      if(placed.length!==words.length)return;
+      if(placed.map(i=>words[i]).join(' ')===SENTENCE){
+        solved=true; $('#sl').classList.add('glow');
+        setTimeout(()=>win("Bilkul sahi.<br>Kuch cheezein bas ek doosray ke liye hoti hain.",level4),1200);
+      } else { SFX.bad(); $('#sl').classList.add('shk'); setTimeout(()=>$('#sl').classList.remove('shk'),450); say("Qareeb hai... tarteeb abhi theek nahi."); }
+    };
+    draw();
+  });
+}
+function level4(){
+  let q=0;
+  go(4, `<h2 class="rise">Hum Ko Kitna Jaanti Hain?</h2><div class="card rise" style="--d:.8s" id="qa"></div>`, ()=>{
+    const ask=()=>{
+      const Q=QUIZ[q];
+      $('#qa').innerHTML=`<p class="small">SAWAL ${q+1} / ${QUIZ.length}</p><p class="qt">${Q.q}</p>
+        <button class="opt" data-a="me">${Q.la||'Main ❤️'}</button><button class="opt" data-a="you">${Q.lb||'Aap ❤️'}</button><div id="fb"></div>`;
+      document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+        SFX.click(); document.querySelectorAll('.opt').forEach(x=>x.disabled=true); b.classList.add('good');
+        $('#fb').innerHTML=`<p class="ok">${Q[b.dataset.a]}</p><button class="btn" id="nx">${q<QUIZ.length-1?'Agla sawal':'Aage barhein'}</button>`;
+        on('nx',()=>{ q++; if(q<QUIZ.length) ask(); else { $('#qa').innerHTML='<div id="fb"></div>'; win("Aap poochh-gachh se bach nikli. ❤️",level5); } });
+      });
+    };
+    ask();
+  });
+}
+function level5(){
+  const LEN=FINAL_LOCK_CODE.length, blank='–'.repeat(LEN); let v='', done=false;
+  go(5, `<h2 class="rise">Sirf Mohabbat Hi Yeh Kholay Gi</h2><div class="card rise" style="--d:.8s">${CLUES.map(c=>`<p class="clue">${c}</p>`).join('')}</div>
+    <div class="rise" style="--d:1.6s"><div id="lk" class="lk">🔒</div><div id="ds" class="ds">${blank}</div>
+    <div class="pad">${[1,2,3,4,5,6,7,8,9,'C',0,'⌫'].map(k=>`<button data-k="${k}">${k}</button>`).join('')}</div><div id="fb"></div></div>`,
+  ()=>document.querySelectorAll('.pad button').forEach(b=>b.onclick=()=>{
+    if(done)return; SFX.click(); const k=b.dataset.k;
+    if(k==='C')v=''; else if(k==='⌫')v=v.slice(0,-1); else if(v.length<LEN)v+=k;
+    $('#ds').textContent=v.padEnd(LEN,'–');
+    if(v.length===LEN){
+      if(v===FINAL_LOCK_CODE){ done=true; $('#lk').textContent='🔓'; $('#lk').classList.add('open'); SFX.unlock(); setTimeout(()=>win("Dil ko sab yaad hai.",level6),1000); }
+      else { SFX.bad(); $('#ds').classList.add('shk'); say(`Yeh code nahi hai...<br>Dobara koshish karein, ${W} ❤️`); setTimeout(()=>{$('#ds').classList.remove('shk');v='';$('#ds').textContent=blank},700); }
+    }}));
+}
+function level6(){
+  go(6, line("IRHA ki Mama aap yahan tak aa gayi hain...",.5,'big')+line("Magar ek cheez hai jo main chahta hoon aap chunein.",2.5)+
+    `<div class="trio rise" style="--d:4.5s"><button class="pick" data-k="m">EK AUR YAAD ❤️</button><button class="pick" data-k="c">EK AUR CHALLENGE 🔐</button><button class="pick" data-k="s">EK AKHRI SURPRISE 🎁</button></div>`,
+  ()=>document.querySelectorAll('.pick').forEach(b=>b.onclick=()=>{
+    SFX.click(); stage.innerHTML='<div id="route" class="rise"></div>'; routes[b.dataset.k]();
+  }));
+}
+const routes = {
+  m(){ $('#route').innerHTML = `<p class="quote">${QUOTE}</p>`+btn("Aage barhein",'nx',4); on('nx',after); },
+  c(){
+    let n=0;
+    $('#route').innerHTML = `<p>Chamakte hue dil ko pakdein. Paanch baar tap karein.</p><div class="arena"><button id="ht">❤</button></div><p id="cnt">0 / 5</p>`;
+    $('#ht').onclick=()=>{ SFX.ok(); n++; $('#cnt').textContent=n+' / 5';
+      if(n>=5){ burst(); setTimeout(after,500); return; }
+      $('#ht').style.left=(Math.random()*80+5)+'%'; $('#ht').style.top=(Math.random()*75+5)+'%'; };
+  },
+  s(){
+    let n=0;
+    $('#route').innerHTML = `<div class="env" id="ev"><div class="flap"></div><span class="seal">🔒</span></div><p id="msg">Lifafay par tap karein.</p>`;
+    $('#ev').onclick=()=>{ n++; SFX.bad(); $('#ev').classList.add('shk'); setTimeout(()=>$('#ev').classList.remove('shk'),450);
+      $('#msg').textContent = ["Yeh band hai.","Abhi bhi band hai. Dobara koshish karein...","Kisi ne ise bohat ehtiyaat se seal kiya hai."][Math.min(n,3)-1];
+      if(n===3) setTimeout(after,1800); };
+  }
+};
+function after(){
+  $('#route').innerHTML = line("Aap ne socha yehi surprise tha?",.3)+line("Abhi nahi.",2.2,'big')+btn("AKHRI LIFAFA KHOLEIN",'nx',4);
+  on('nx',level7);
+}
+function level7(){
+  const L=[`${W}...`,"Aap ne har suraag hal kar liya.","Aap ko har chhoti baat yaad rahi.","Aap yahan tak pohanch gayin.","Bas ek cheez baqi hai..."];
+  go(7, `<div class="env rise" id="ev"><div class="flap"></div><span class="seal">❤</span></div>`+
+    L.map((t,i)=>line(t,2+i*3,i===0?'big':'')).join('')+btn("APNA SURPRISE KHOLEIN ❤️",'op',2+L.length*3),
+  ()=>on('op',reveal));
+}
+/* ================= 7. VIDEO (link ya file) ================= */
+const getLink = () => (G.videoLink||'').trim();
+function embedURL(l){                 // link ko player mein badalta hai (YouTube / Drive / Vimeo / seedhi file)
+  let m;
+  if(m=l.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([\w-]{11})/)) return {t:'iframe',src:`https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`,yt:1};
+  if(m=l.match(/drive\.google\.com\/file\/d\/([\w-]+)/)) return {t:'iframe',src:`https://drive.google.com/file/d/${m[1]}/preview`};
+  if(m=l.match(/vimeo\.com\/(?:video\/)?(\d+)/)) return {t:'iframe',src:`https://player.vimeo.com/video/${m[1]}?autoplay=1`};
+  if(/\.(mp4|webm|mov|m4v|ogg)(\?|$)/i.test(l)) return {t:'file'};
+  return {t:'other'};
+}
+function reveal(){
+  SFX.reveal(); $('#ev').classList.add('open'); $('#op').style.display='none'; confetti();
+  setTimeout(()=>{
+    const link=getLink().replace(/"/g,'%22'), u=link?embedURL(link):{t:'local'};
+    const pm=`<button class="btn" id="pm" style="display:none">MERA PAIGHAM CHALAYEIN ❤️</button>`;
+    let box;
+    if(u.t==='iframe') box=`<iframe id="vframe" src="${u.src}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:10px"${u.yt?` onload="try{this.contentWindow.postMessage(JSON.stringify({event:'listening',id:1}),'*')}catch(e){}"`:''}></iframe>`;
+    else if(u.t==='file') box=`<video id="anniversaryVideo" controls playsinline preload="auto" src="${link}"></video>${pm}`;
+    else if(u.t==='other') box=`<button class="btn" id="ol" style="position:static;translate:none;margin:20px">VIDEO KA LINK KHOLEIN ❤️</button>`;
+    else box=`<video id="anniversaryVideo" controls playsinline preload="auto"><source src="${G.videoFile}" type="video/mp4"></video>${pm}`;
+    stage.innerHTML = `<h2 class="rise">Anniversary Mubarak, ${W} ❤️</h2>`+line("Kisi ka aap ke liye paigham hai...",.8)+
+      `<div class="vf rise" style="--d:1.6s">${box}</div>`+
+      (link?`<a class="sm rise" style="--d:3s" href="${link}" target="_blank" rel="noopener">Agar video na chale to yahan naye tab mein kholein</a>`:'')+
+      `<p id="vnote" class="small"></p>`+line("Meri Zindagi ka safar Aap se shuru hota hai.",2.6,'big')+line(`— ${G.husbandName}`,3.2)+
+      btn("VIDEO DEKH LI — AAGE ❤️",'fin',12);
+    on('fin',end);
+    const v=$('#anniversaryVideo');
+    if(v){
+      const src=v.querySelector('source'); (src||v).onerror=()=>$('#vnote').textContent=`Video nahi mili. ${G.videoFile} ko isi folder mein rakhein ya link check karein.`;
+      v.onplay=()=>{ fadeTo(0); $('#pm').style.display='none'; }; v.onended=end;
+      $('#pm').onclick=()=>v.play();
+      setTimeout(()=>{ v.scrollIntoView({behavior:'smooth',block:'center'}); v.play().catch(()=>{$('#pm').style.display='block'}); },2000);
+    } else if(u.t==='iframe'){ fadeTo(0); setTimeout(()=>$('#vframe').scrollIntoView({behavior:'smooth',block:'center'}),2000); }
+    else if(u.t==='other'){ fadeTo(0); $('#ol').onclick=()=>window.open(link,'_blank'); setTimeout(()=>window.open(link,'_blank'),2000); }
+  },2200);
+}
+window.addEventListener('message',e=>{                         // YouTube player events (video khatam hote hi end screen)
+  if(!/youtube\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
+  let d; try{ d=typeof e.data==='string'?JSON.parse(e.data):e.data; }catch(x){ return; }
+  if(!d) return;
+  const st = d.event==='onStateChange' ? d.info : (d.event==='infoDelivery' && d.info && d.info.playerState!==undefined ? d.info.playerState : null);
+  if(st===1) fadeTo(0);
+  if(st===0 && document.body.dataset.l==='7') end();
+});
+function end(){
+  go(8, `<h1 class="rise">KHATAM ❤️</h1>`+line("Dar-asal...",3)+line("Yeh khatam nahi.",5)+line("Bas ek aur baab.",7)+
+    line(`Anniversary Mubarak, ${W}.`,10,'big')+btn("HAMARA SAFAR DOBARA KHELEIN",'rp',12), ()=>on('rp',start));
+}
+/* ================= SECRET MENU (sab kuch edit karne ke liye) ================= */
+const esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const fld=(id,l,v,t='text')=>`<label>${l}<input id="${id}" type="${t}" value="${esc(v)}"></label>`;
+const qrow=(q={})=>`<div class="qr"><input class="qq" placeholder="Sawal" value="${esc(q.q)}"><input class="qa" placeholder="Pehle button ka text (khali = Main ❤️)" value="${esc(q.la)}"><input class="qm" placeholder="Pehle button ka jawab" value="${esc(q.me)}"><input class="qb" placeholder="Doosre button ka text (khali = Aap ❤️)" value="${esc(q.lb)}"><input class="qy" placeholder="Doosre button ka jawab" value="${esc(q.you)}"><button class="x" type="button">✕</button></div>`;
+function readForm(){
+  const v=id=>$('#'+id).value.trim();
+  return {wifeName:v('f_w'),husbandName:v('f_h'),anniversaryDate:v('f_d'),videoLink:v('f_v'),lock:v('f_lock'),admin:v('f_adm'),
+    level1:{question:v('f_q1'),options:[1,2,3,4].map(i=>v('f_o'+i)),correct:+$('#f_c').value},
+    sentence:v('f_s').toUpperCase().replace(/\s+/g,' '),quote:v('f_qt'),clues:[...document.querySelectorAll('[id^="f_k"]')].map(e=>e.value.trim()).filter(Boolean),
+    quiz:[...document.querySelectorAll('.qr')].map(r=>({q:r.querySelector('.qq').value.trim(),me:r.querySelector('.qm').value.trim(),you:r.querySelector('.qy').value.trim(),la:r.querySelector('.qa').value.trim(),lb:r.querySelector('.qb').value.trim()})).filter(x=>x.q)};
+}
+function saveCfg(c){ try{ localStorage.setItem('iqraCfg',JSON.stringify(c)); return true; }catch(e){ return false; } }
+function openEditor(){
+  const m=$('#mod'), L=LEVEL1;
+  m.innerHTML=`<div class="card"><h2 style="font-size:1.6rem">Game Edit Menu</h2>
+  <h3>Aam maloomat</h3>${fld('f_w','Biwi ka naam',G.wifeName)}${fld('f_h','Aap ka naam (video ke neeche)',G.husbandName)}${fld('f_d','Anniversary ka text (shuru ki screen par)',G.anniversaryDate)}
+  <h3>Video</h3>${fld('f_v','Video ka link (YouTube / Google Drive / Vimeo / seedha .mp4). Khali chhorein to local file chalegi.',G.videoLink,'url')}
+  <h3>Level 1 — Kahani kahan se shuru hui</h3>${fld('f_q1','Sawal',L.question)}${L.options.map((o,i)=>fld('f_o'+(i+1),'Option '+(i+1),o)).join('')}
+  <label>Sahi option kaun sa hai?<br><select id="f_c">${L.options.map((o,i)=>`<option value="${i}" ${i===L.correct?'selected':''}>Option ${i+1}</option>`).join('')}</select></label>
+  <h3>Level 3 — Mohabbat bhara jumla</h3>${fld('f_s','Jumla (alfaaz space se alag)',SENTENCE)}
+  <h3>Level 4 — Sawal aur mazahiya jawab</h3><div id="qrs">${QUIZ.map(qrow).join('')}</div><button class="btn" id="qadd" type="button">+ Naya sawal</button>
+  <h3>Level 5 — Lock</h3>${fld('f_lock','Lock code (sirf digits, jaise anniversary date DDMMYYYY)',FINAL_LOCK_CODE)}${[0,1,2].map(i=>fld('f_k'+(i+1),'Hint '+(i+1)+(i?' (optional)':''),CLUES[i]||'')).join('')}
+  <h3>Level 6 — Quote</h3>${fld('f_qt','Quote',QUOTE)}
+  <h3>Secret code</h3>${fld('f_adm','Is menu ka secret code',ADMIN_CODE)}
+  <h3>Backup</h3><textarea id="f_json" placeholder="Export dabayein to yahan settings aa jati hain. Doosray device par laane ke liye yahan paste karke Import dabayein."></textarea>
+  <button class="btn" id="fexp" type="button">Export</button><button class="btn" id="fimp" type="button">Import</button>
+  <p id="vm" class="small"></p>
+  <button class="btn" id="fsave" type="button">SAVE KAREIN</button><button class="btn" id="frst" type="button">Asal par wapas</button><button class="btn" id="fclose" type="button">Band karein</button></div>`;
+  $('#qadd').onclick=()=>$('#qrs').insertAdjacentHTML('beforeend',qrow());
+  $('#qrs').onclick=e=>{ if(e.target.classList.contains('x'))e.target.parentNode.remove(); };
+  $('#fclose').onclick=()=>m.hidden=true;
+  $('#fexp').onclick=()=>{ $('#f_json').value=JSON.stringify(readForm()); };
+  $('#fimp').onclick=()=>{ try{ const c=JSON.parse($('#f_json').value); if(saveCfg(c))location.reload(); else $('#vm').textContent='Save nahi hua.'; }catch(e){ $('#vm').textContent='Yeh settings theek nahi hain.'; } };
+  $('#frst').onclick=()=>{ if(confirm('Saari settings asal par wapas?')){ try{localStorage.removeItem('iqraCfg')}catch(e){} location.reload(); } };
+  $('#fsave').onclick=()=>{
+    const c=readForm(), err=x=>$('#vm').textContent=x;
+    if(!c.wifeName)return err('Biwi ka naam likhein.');
+    if(!/^\d{4,}$/.test(c.lock))return err('Lock code sirf digits mein hona chahiye (kam az kam 4).');
+    if(c.sentence.split(' ').length<2)return err('Jumla kam az kam 2 alfaaz ka ho.');
+    if(c.level1.options.some(o=>!o))return err('Level 1 ke chaaron options likhein.');
+    if(!c.quiz.length)return err('Kam az kam ek sawal rakhein.');
+    if(!c.clues.length)return err('Kam az kam ek hint likhein.');
+    if(!c.admin)return err('Secret code khali nahi ho sakta.');
+    if(saveCfg(c)){ err('Save ho gaya ✅'); setTimeout(()=>location.reload(),600); } else err('Save nahi hua (browser ne rok diya).');
+  };
+}
+$('#adm').onclick=()=>{
+  const m=$('#mod'); m.hidden=false;
+  m.innerHTML=`<div class="card" style="text-align:center"><p>Secret code likhein</p><input id="ac" type="password" autocomplete="off"><button class="btn" id="aok">Kholein</button><button class="btn" id="acl">Band karein</button><p id="am" class="small"></p></div>`;
+  $('#acl').onclick=()=>m.hidden=true;
+  $('#aok').onclick=()=>{ if($('#ac').value===ADMIN_CODE)openEditor(); else $('#am').textContent='Ghalat code.'; };
+};
+/* ================= 5. ANIMATIONS ================= */
+function mk(cls,html,css,life){ const e=document.createElement('span'); e.className=cls; e.innerHTML=html; e.style.cssText=css; $('#fx').appendChild(e); setTimeout(()=>e.remove(),life); }
+setInterval(()=>mk('h',['❤','❤','💗','🌹','✨','🌸'][Math.random()*6|0],`left:${Math.random()*100}%;font-size:${10+Math.random()*16}px;animation-duration:${9+Math.random()*8}s`,17000),700);
+function burst(x=innerWidth/2,y=innerHeight/2,n=16){            // small sparkle celebration
+  for(let i=0;i<n;i++){ const a=Math.random()*6.28,r=60+Math.random()*90;
+    mk('sp','✦',`left:${x}px;top:${y}px;font-size:${10+Math.random()*12}px;--x:${Math.cos(a)*r}px;--y:${Math.sin(a)*r}px`,1000); }
+}
+function confetti(){                                         // final confetti
+  const col=['#d9a38f','#f5cdd5','#fbf3e8','#e8b86a','#c9506e'];
+  for(let i=0;i<110;i++) mk('cf','',`left:${Math.random()*100}%;background:${col[i%5]};animation-duration:${3+Math.random()*3}s;animation-delay:${Math.random()*1.2}s`,7500);
+}
+/* ================= 6. SOUND ================= */
+let ac;
+function tone(f,d=.15,t='sine',v=.05,delay=0){               // soft UI sounds via Web Audio (no files needed)
+  try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); const o=ac.createOscillator(),g=ac.createGain(),s=ac.currentTime+delay;
+    o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.connect(g);g.connect(ac.destination);o.start(s);o.stop(s+d); }catch(e){}
+}
+const SFX={
+  click:()=>tone(660,.08), flip:()=>tone(900,.06,'triangle'), bad:()=>tone(180,.25,'triangle',.07),
+  ok:()=>{tone(523,.2,'sine',.06);tone(784,.3,'sine',.06,.12)},
+  unlock:()=>[392,523,659,784].forEach((f,i)=>tone(f,.4,'sine',.06,i*.12)),
+  reveal:()=>[392,494,587,784,988].forEach((f,i)=>tone(f,.8,'sine',.06,i*.18))
+};
+let music=null,musicOn=true,vol=.4,ft;
+function initMusic(){                                        // starts after her first click (browser rule)
+  if(music)return; music=new Audio(G.musicFile); music.loop=true; music.volume=0;
+  music.play().then(()=>fadeTo(vol)).catch(()=>{});
+}
+function fadeTo(v){                                          // smooth volume change between stages
+  vol=v; if(!music)return; clearInterval(ft); const t=musicOn?v:0;
+  ft=setInterval(()=>{ const d=t-music.volume; if(Math.abs(d)<.02){music.volume=t;clearInterval(ft)} else music.volume=Math.max(0,Math.min(1,music.volume+Math.sign(d)*.02)); },60);
+}
+$('#mbtn').onclick=()=>{
+  musicOn=!musicOn; $('#mbtn').textContent=musicOn?'🔊 Music ON':'🔇 Music OFF';
+  if(music&&musicOn&&music.paused)music.play().catch(()=>{});
+  fadeTo(vol);
+};
+document.addEventListener('pointerdown',e=>{ if(!e.target.closest('#mod'))burst(e.clientX,e.clientY,5); });
+/* ================= 8. GO! ================= */
+start();
+</script>
+</body>
+</html>
